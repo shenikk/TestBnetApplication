@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void createPost() {
 
-        Post post = new Post(23, "new Title", mEditText.getText().toString());
+        Post post = new Post(, mEditText.getText().toString());
 
         Call<Post> call = jsonPlaceHolderApi.createPost(post);
 

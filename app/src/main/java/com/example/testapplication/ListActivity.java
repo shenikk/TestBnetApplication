@@ -28,6 +28,7 @@ public class ListActivity extends AppCompatActivity {
     private ArrayList<Note> myNotes;
 
     private SessionApi mySessionApi;
+    MySession mySessionResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +58,7 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<MySession> call, Response<MySession> response) {
                 if (response.isSuccessful()) {
-                    MySession mySessionResponse = response.body();
+                    mySessionResponse = response.body();
                 }
             }
 
