@@ -11,45 +11,61 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ListActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<Note> myNote;
+    private ArrayList<Note> myNotes;
 
-    private TextView mTextViewNote;
+    private SessionApi mySessionApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        myNote = new ArrayList<>();
-        myNote.add(new Note("hello"));
-        myNote.add(new Note("hello"));
-        myNote.add(new Note("hello"));
-        myNote.add(new Note("hello"));
-        myNote.add(new Note("hello"));
-
+        myNotes = new ArrayList<>();
 
         mRecyclerView = findViewById(R.id.recycler_view);
 
         mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new MyAdapter(myNote);
+        mAdapter = new MyAdapter(myNotes);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
-        mTextViewNote = findViewById(R.id.textView_note);
+        //создаем Retrofit и получаем сессию
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://bnet.i-partner.ru/testAPI/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
+        mySessionApi = retrofit.create(SessionApi.class);
+        Call<MySession> call = mySessionApi.getSession();
 
+        call.enqueue(new Callback<MySession>() {
+            @Override
+            public void onResponse(Call<MySession> call, Response<MySession> response) {
+                if (response.isSuccessful()) {
+                    MySession mySessionResponse = response.body();
+                }
+            }
 
+            @Override
+            public void onFailure(Call<MySession> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
     //добавляем toolbar
@@ -77,6 +93,7 @@ public class ListActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //получаем и отображаем данные из MainActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -84,12 +101,11 @@ public class ListActivity extends AppCompatActivity {
         if (requestCode==1) {
             if (resultCode==RESULT_OK) {
                 String result = data.getStringExtra("result");
-                if (!result.equals(null)) {
-                    mTextViewNote.setText(result);
-                } else {
-                    mTextViewNote.setText("Где-то ошибка!");
+                if (result != null) {
+                    myNotes.add(new Note(result));
+                    // обновляем recyclerView
+                    mAdapter.notifyDataSetChanged();
                 }
-
             }
         }
     }

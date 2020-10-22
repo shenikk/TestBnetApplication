@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -57,10 +58,11 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
-                if (!response.isSuccessful()) {
-                    mEditText.setText("Code: " + response.code());
-                    return;
-                }
+                Log.d("MyTag", "Получили response");
+//                if (!response.isSuccessful()) {
+//                    mEditText.setText("Code: " + response.code());
+//                    return;
+//                }
 
                 Post postResponse = response.body();
 
@@ -71,18 +73,20 @@ public class MainActivity extends AppCompatActivity {
                 content += "Title: " + postResponse.getTitle() + "\n";
                 content += "Text: " + postResponse.getText() + "\n\n";
                 mEditText.setText(content);
+
+                // хочу передать данные
+                Intent intent = new Intent(getBaseContext(), ListActivity.class);
+                intent.putExtra("result", mEditText.getText().toString());
+                setResult(RESULT_OK, intent);
+                finish();
+
             }
 
             @Override
             public void onFailure(Call<Post> call, Throwable t) {
                 mEditText.setText(t.getMessage());
+                Log.d("MyTag", "Получили ошибку");
             }
         });
-
-        // хочу передать данные
-        Intent intent = new Intent(this, ListActivity.class);
-        intent.putExtra("result", mEditText.getText().toString());
-        setResult(RESULT_OK, intent);
-        finish();
     }
 }
