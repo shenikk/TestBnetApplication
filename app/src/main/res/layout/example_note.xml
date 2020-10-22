@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView_da"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Date of creation"/>
+
+    <TextView
+        android:id="@+id/textView_dm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Date of modification"/>
+
+    <TextView
+        android:id="@+id/textView_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Text of the note"/>
+
+</LinearLayout>
