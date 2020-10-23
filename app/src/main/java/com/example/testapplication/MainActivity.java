@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     EditText mEditText;
     Button mButtonSave;
     Button mButtonDelete;
-    private JsonPlaceHolderApi jsonPlaceHolderApi;
+    private AddEntries addEntries;
 
 
     @Override
@@ -33,11 +33,11 @@ public class MainActivity extends AppCompatActivity {
         mButtonDelete = (Button) findViewById(R.id.button2);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://jsonplaceholder.typicode.com/")
+                .baseUrl("https://bnet.i-partner.ru/testAPI/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+        addEntries = retrofit.create(AddEntries.class);
 
         mButtonSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,9 +51,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void createPost() {
 
-        Post post = new Post(, mEditText.getText().toString());
+        //получаю сессию
+        Intent intent = getIntent();
+        String session = intent.getStringExtra("mySession");
 
-        Call<Post> call = jsonPlaceHolderApi.createPost(post);
+        Post post = new Post(session, mEditText.getText().toString());
+
+        Call<Post> call = addEntries.createPost(post);
 
         call.enqueue(new Callback<Post>() {
             @Override
@@ -66,18 +70,13 @@ public class MainActivity extends AppCompatActivity {
 
                 Post postResponse = response.body();
 
-                String content = "";
-                content += "Code" + response.code() + "\n";
-                content += "ID: " + postResponse.getId() + "\n";
-                content += "User ID: " + postResponse.getUserId() + "\n";
-                content += "Title: " + postResponse.getTitle() + "\n";
-                content += "Text: " + postResponse.getText() + "\n\n";
-                mEditText.setText(content);
+                mEditText.setText(postResponse + "");
 
-                // хочу передать данные
-                Intent intent = new Intent(getBaseContext(), ListActivity.class);
-                intent.putExtra("result", mEditText.getText().toString());
-                setResult(RESULT_OK, intent);
+
+                //хочу передать данные первому экрану
+                Intent resultIntent = new Intent(getBaseContext(), ListActivity.class);
+                resultIntent.putExtra("result", mEditText.getText().toString());
+                setResult(RESULT_OK, resultIntent);
                 finish();
 
             }

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,14 +22,14 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ListActivity extends AppCompatActivity {
+public class ListActivity extends AppCompatActivity implements OnViewHolderListener {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<Note> myNotes;
 
     private SessionApi mySessionApi;
-    MySession mySessionResponse;
+    String mySessionResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class ListActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recycler_view);
 
         mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new MyAdapter(myNotes);
+        mAdapter = new MyAdapter(myNotes, this);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
@@ -58,7 +59,8 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<MySession> call, Response<MySession> response) {
                 if (response.isSuccessful()) {
-                    mySessionResponse = response.body();
+                    mySessionResponse = response.body().toString();
+                    Log.d("MySession", "My session is " + mySessionResponse);
                 }
             }
 
@@ -83,6 +85,7 @@ public class ListActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.new_note:
                 Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("mySession", mySessionResponse);
                 startActivityForResult(intent,1);
                 break;
 
@@ -109,5 +112,12 @@ public class ListActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    @Override
+    public void onPostClick(int position) {
+        myNotes.get(position);
+        Intent intent = new Intent(this, SingleTextActivity.class);
+        startActivity(intent);
     }
 }

@@ -13,9 +13,11 @@ import java.util.zip.Inflater;
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     private List<Note> notes;
+    private OnViewHolderListener onViewHolderListener;
 
-    public MyAdapter(List<Note> notes) {
+    public MyAdapter(List<Note> notes, OnViewHolderListener onViewHolderListener) {
         this.notes = notes;
+        this.onViewHolderListener = onViewHolderListener;
     }
 
 
@@ -23,7 +25,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.example_note, parent,false);
-        MyViewHolder mvh = new MyViewHolder(view);
+        MyViewHolder mvh = new MyViewHolder(view, onViewHolderListener);
         return mvh;
     }
 
