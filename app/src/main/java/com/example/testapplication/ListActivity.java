@@ -48,19 +48,21 @@ public class ListActivity extends AppCompatActivity implements OnViewHolderListe
 
         //создаем Retrofit и получаем сессию
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://bnet.i-partner.ru/testAPI/")
+                .baseUrl("https://bnet.i-partner.ru/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         mySessionApi = retrofit.create(SessionApi.class);
-        Call<MySession> call = mySessionApi.getSession();
+        Call<MySession> call = mySessionApi.getSession("new_session");
+
 
         call.enqueue(new Callback<MySession>() {
             @Override
             public void onResponse(Call<MySession> call, Response<MySession> response) {
                 if (response.isSuccessful()) {
-                    mySessionResponse = response.body().toString();
-                    Log.d("MySession", "My session is " + mySessionResponse);
+                    mySessionResponse = response.body().data.session;
+                    //Log.d("MySession", "My session is " + mySessionResponse);
+                    getEntries();
                 }
             }
 

@@ -6,9 +6,9 @@ public class MySession {
 
 
     public class MyData {
-        public int session;
+        public String session;
 
-        public int getSession() {
+        public String getSession() {
             return session;
         }
     }

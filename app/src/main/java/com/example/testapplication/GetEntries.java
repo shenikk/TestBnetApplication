@@ -7,5 +7,5 @@ import retrofit2.http.POST;
 public interface GetEntries {
 
     @POST("get_entry")
-    Call<Post> getPost(@Body Post post);
+    Call<Post> getPost(@Body String mySession);
 }

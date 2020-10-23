@@ -9,7 +9,6 @@ import retrofit2.http.POST;
 
 public interface AddEntries {
 
-    @Headers("token: N6zbaS4-G6-RDMQKyb")
     @POST("add_entry")
     Call<Post> createPost(@Body Post post);
 
