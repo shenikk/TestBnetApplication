@@ -31,6 +31,8 @@ public class ListActivity extends AppCompatActivity implements OnViewHolderListe
     private SessionApi mySessionApi;
     String mySessionResponse;
 
+    private GetEntries getEntries;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +55,8 @@ public class ListActivity extends AppCompatActivity implements OnViewHolderListe
                 .build();
 
         mySessionApi = retrofit.create(SessionApi.class);
+        getEntries = retrofit.create(GetEntries.class);
+
         Call<MySession> call = mySessionApi.getSession("new_session");
 
 
@@ -121,5 +125,23 @@ public class ListActivity extends AppCompatActivity implements OnViewHolderListe
         myNotes.get(position);
         Intent intent = new Intent(this, SingleTextActivity.class);
         startActivity(intent);
+    }
+    public void getEntries() {
+        Call<Entries> call = getEntries.getEntry(mySessionResponse);
+
+        call.enqueue(new Callback<Entries>() {
+            @Override
+            public void onResponse(Call<Entries> call, Response<Entries> response) {
+                if (response.isSuccessful()) {
+                    Entries entries = response.body();
+                    
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Entries> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 }
