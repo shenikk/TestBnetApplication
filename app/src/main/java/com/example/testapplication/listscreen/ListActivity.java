@@ -39,6 +39,7 @@ public class ListActivity extends AppCompatActivity implements OnViewHolderListe
     String mySessionResponse;
 
     private GetEntries getEntries;
+    private Entries entries;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,13 +131,6 @@ public class ListActivity extends AppCompatActivity implements OnViewHolderListe
         }
     }
 
-    @Override
-    public void onPostClick(int position) {
-        myNotes.get(position);
-        Intent intent = new Intent(this, DetailActivity.class);
-        startActivity(intent);
-    }
-
     //получаем ранее введенные данные
     public void getEntries() {
         Call<Entries> call = getEntries.getEntry("get_entries", mySessionResponse+"");
@@ -145,7 +139,7 @@ public class ListActivity extends AppCompatActivity implements OnViewHolderListe
             @Override
             public void onResponse(Call<Entries> call, Response<Entries> response) {
                 if (response.isSuccessful()) {
-                    Entries entries = response.body();
+                    entries = response.body();
 
                     myNotes.clear();
                     myNotes.addAll(entries.getData().get(0));
@@ -159,5 +153,17 @@ public class ListActivity extends AppCompatActivity implements OnViewHolderListe
                 t.printStackTrace();
             }
         });
+    }
+
+    @Override
+    public void onPostClick(int position) {
+        myNotes.get(position);
+        Intent intent = new Intent(this, DetailActivity.class);
+
+        intent.putExtra("MyDa", myNotes.get(position).da);
+        intent.putExtra("MyDm", myNotes.get(position).dm);
+        intent.putExtra("MyEntries", myNotes.get(position).body);
+
+        startActivity(intent);
     }
 }
