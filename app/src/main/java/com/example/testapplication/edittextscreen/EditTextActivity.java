@@ -12,7 +12,7 @@ import android.widget.EditText;
 import com.example.testapplication.AddEntries;
 import com.example.testapplication.Post;
 import com.example.testapplication.R;
-import com.example.testapplication.listscreen.ListActivity;
+import com.example.testapplication.listScreen.ListActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,13 +26,12 @@ public class EditTextActivity extends AppCompatActivity {
     Button mButtonDelete;
     private AddEntries addEntries;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // инициализация View
+        //инициализация View
         mEditText = (EditText) findViewById(R.id.editText);
         mButtonSave = (Button) findViewById(R.id.button1);
         mButtonDelete = (Button) findViewById(R.id.button2);
@@ -56,7 +55,7 @@ public class EditTextActivity extends AppCompatActivity {
 
     private void createPost() {
 
-        //получаю сессию
+        //получаем сессию
         Intent intent = getIntent();
         String session = intent.getStringExtra("mySession");
 
@@ -71,7 +70,7 @@ public class EditTextActivity extends AppCompatActivity {
                     Post postResponse = response.body();
                     mEditText.setText(postResponse + "");
 
-                    //хочу передать данные первому экрану
+                    //передаем данные первому экрану
                     Intent resultIntent = new Intent(getBaseContext(), ListActivity.class);
                     resultIntent.putExtra("result", mEditText.getText().toString());
                     setResult(RESULT_OK, resultIntent);

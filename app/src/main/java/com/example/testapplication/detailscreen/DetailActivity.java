@@ -9,14 +9,14 @@ import android.widget.TextView;
 import com.example.testapplication.R;
 
 public class DetailActivity extends AppCompatActivity {
-    TextView mSingleTextview;
+    TextView mSingleTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_text);
 
-        mSingleTextview = findViewById(R.id.single_text);
+        mSingleTextView = findViewById(R.id.single_text);
 
         Intent intent = getIntent();
         String resultBody = intent.getStringExtra("MyEntries");
@@ -25,6 +25,6 @@ public class DetailActivity extends AppCompatActivity {
 
         String text = resultDa + "\n" + resultDm + "\n" + resultBody;
 
-        mSingleTextview.setText(text);
+        mSingleTextView.setText(text);
     }
 }

@@ -3,24 +3,25 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="8dp">
 
     <TextView
         android:id="@+id/textView_da"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Date of creation"/>
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/textView_dm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Date of modification"/>
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/textView_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Text of the note"/>
+        android:textSize="20sp"/>
 
 </LinearLayout>

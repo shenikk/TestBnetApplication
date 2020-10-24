@@ -1,4 +1,4 @@
-package com.example.testapplication.listscreen;
+package com.example.testapplication.listScreen;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,8 +26,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.example_note, parent,false);
-        MyViewHolder mvh = new MyViewHolder(view, onViewHolderListener);
-        return mvh;
+        return new MyViewHolder(view, onViewHolderListener);
     }
 
     @Override

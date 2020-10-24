@@ -20,7 +20,7 @@
             android:label="DetailActivity"/>
         <activity android:name=".edittextscreen.EditTextActivity"
             android:label="EditTextActivity"/>
-        <activity android:name=".listscreen.ListActivity">
+        <activity android:name=".listScreen.ListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

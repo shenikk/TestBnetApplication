@@ -1,4 +1,4 @@
-package com.example.testapplication.listscreen;
+package com.example.testapplication.listScreen;
 
 import android.view.View;
 import android.widget.TextView;
@@ -28,6 +28,5 @@ public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClic
     @Override
     public void onClick(View view) {
         onViewHolderListener.onPostClick(getAdapterPosition());
-
     }
 }

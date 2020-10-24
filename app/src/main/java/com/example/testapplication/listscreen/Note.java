@@ -1,4 +1,4 @@
-package com.example.testapplication.listscreen;
+package com.example.testapplication.listScreen;
 
 public class Note {
     public String da; // дата создания

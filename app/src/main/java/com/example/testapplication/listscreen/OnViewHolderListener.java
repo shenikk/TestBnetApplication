@@ -1,6 +1,4 @@
-package com.example.testapplication.listscreen;
-
-import android.view.View;
+package com.example.testapplication.listScreen;
 
 public interface OnViewHolderListener {
     void onPostClick(int position);

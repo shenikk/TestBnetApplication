@@ -1,4 +1,4 @@
-package com.example.testapplication.listscreen;
+package com.example.testapplication.listScreen;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -57,7 +57,6 @@ public class ListActivity extends AppCompatActivity implements OnViewHolderListe
         mRecyclerView.setAdapter(mAdapter);
 
 
-
         //создаем Retrofit и получаем сессию
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://bnet.i-partner.ru/")
@@ -75,8 +74,6 @@ public class ListActivity extends AppCompatActivity implements OnViewHolderListe
             public void onResponse(Call<MySession> call, Response<MySession> response) {
                 if (response.isSuccessful()) {
                     mySessionResponse = response.body().data.session;
-                    //Log.d("MySession", "My session is " + mySessionResponse);
-                    getEntries();
                 }
             }
 
@@ -111,7 +108,7 @@ public class ListActivity extends AppCompatActivity implements OnViewHolderListe
         return super.onOptionsItemSelected(item);
     }
 
-    //получаем и отображаем данные из MainActivity
+    //получаем и отображаем данные из EditTextActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -121,9 +118,6 @@ public class ListActivity extends AppCompatActivity implements OnViewHolderListe
                 String result = data.getStringExtra("result");
                 if (result != null) {
                     getEntries();
-//                    myNotes.add(new Note(result));
-//                    // обновляем recyclerView
-//                    mAdapter.notifyDataSetChanged();
                 }
             }
         }
@@ -145,7 +139,6 @@ public class ListActivity extends AppCompatActivity implements OnViewHolderListe
                     mAdapter.notifyDataSetChanged();
                 }
             }
-
             @Override
             public void onFailure(Call<Entries> call, Throwable t) {
                 t.printStackTrace();
