@@ -38,7 +38,7 @@ public class EditTextActivity extends AppCompatActivity {
         mButtonDelete = (Button) findViewById(R.id.button2);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://bnet.i-partner.ru/testAPI/")
+                .baseUrl("https://bnet.i-partner.ru/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -60,30 +60,23 @@ public class EditTextActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String session = intent.getStringExtra("mySession");
 
-        Post post = new Post(session, mEditText.getText().toString());
-
-        Call<Post> call = addEntries.createPost(post);
+        Call<Post> call = addEntries.createPost("add_entry", session+"", mEditText.getText().toString()+"");
 
         call.enqueue(new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
                 Log.d("MyTag", "Получили response");
-//                if (!response.isSuccessful()) {
-//                    mEditText.setText("Code: " + response.code());
-//                    return;
-//                }
 
-                Post postResponse = response.body();
+                if (response.isSuccessful()) {
+                    Post postResponse = response.body();
+                    mEditText.setText(postResponse + "");
 
-                mEditText.setText(postResponse + "");
-
-
-                //хочу передать данные первому экрану
-                Intent resultIntent = new Intent(getBaseContext(), ListActivity.class);
-                resultIntent.putExtra("result", mEditText.getText().toString());
-                setResult(RESULT_OK, resultIntent);
-                finish();
-
+                    //хочу передать данные первому экрану
+                    Intent resultIntent = new Intent(getBaseContext(), ListActivity.class);
+                    resultIntent.putExtra("result", mEditText.getText().toString());
+                    setResult(RESULT_OK, resultIntent);
+                    finish();
+                }
             }
 
             @Override

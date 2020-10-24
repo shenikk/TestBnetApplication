@@ -121,9 +121,10 @@ public class ListActivity extends AppCompatActivity implements OnViewHolderListe
             if (resultCode==RESULT_OK) {
                 String result = data.getStringExtra("result");
                 if (result != null) {
-                    myNotes.add(new Note(result));
-                    // обновляем recyclerView
-                    mAdapter.notifyDataSetChanged();
+                    getEntries();
+//                    myNotes.add(new Note(result));
+//                    // обновляем recyclerView
+//                    mAdapter.notifyDataSetChanged();
                 }
             }
         }
@@ -145,7 +146,11 @@ public class ListActivity extends AppCompatActivity implements OnViewHolderListe
             public void onResponse(Call<Entries> call, Response<Entries> response) {
                 if (response.isSuccessful()) {
                     Entries entries = response.body();
-                    
+
+                    myNotes.clear();
+                    myNotes.addAll(entries.getData().get(0));
+
+                    mAdapter.notifyDataSetChanged();
                 }
             }
 

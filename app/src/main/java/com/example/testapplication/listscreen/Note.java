@@ -1,40 +1,19 @@
 package com.example.testapplication.listscreen;
 
-import java.util.Calendar;
-
 public class Note {
-   // private Calendar da; // дата создания
-   // private Calendar dm; //дата модификации
-    private String text;
+    public String da; // дата создания
+    public String dm; //дата модификации
+    public String body;
 
-    //временно изменила конструктор
-    public Note(String text) {
-       // this.da = da;
-        //this.dm = dm;
-        this.text = text;
+    public String getDa() {
+        return da;
     }
 
-//    public Calendar getDa() {
-//        return da;
-//    }
-//
-//    public void setDa(Calendar da) {
-//        this.da = da;
-//    }
-//
-//    public Calendar getDm() {
-//        return dm;
-//    }
-//
-//    public void setDm(Calendar dm) {
-//        this.dm = dm;
-//    }
-
-    public String getText() {
-        return text;
+    public String getDm() {
+        return dm;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public String getBody() {
+        return body;
     }
 }
