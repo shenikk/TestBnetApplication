@@ -104,9 +104,7 @@ public class ListActivity extends AppCompatActivity implements OnViewHolderListe
                 intent.putExtra("mySession", mySessionResponse);
                 startActivityForResult(intent,1);
                 break;
-
-            case R.id.add_note:
-                Toast.makeText(this,"Add some notes", Toast.LENGTH_LONG).show();
+            default:
                 break;
         }
 
