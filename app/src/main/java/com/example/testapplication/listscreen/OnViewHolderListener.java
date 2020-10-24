@@ -1,4 +1,4 @@
-package com.example.testapplication;
+package com.example.testapplication.listscreen;
 
 import android.view.View;
 

@@ -1,4 +1,4 @@
-package com.example.testapplication;
+package com.example.testapplication.listscreen;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,11 +8,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.example.testapplication.Entries;
+import com.example.testapplication.GetEntries;
+import com.example.testapplication.edittextscreen.EditTextActivity;
+import com.example.testapplication.MySession;
+import com.example.testapplication.R;
+import com.example.testapplication.SessionApi;
+import com.example.testapplication.detailscreen.DetailActivity;
 
 import java.util.ArrayList;
 
@@ -92,7 +99,7 @@ public class ListActivity extends AppCompatActivity implements OnViewHolderListe
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.new_note:
-                Intent intent = new Intent(this, MainActivity.class);
+                Intent intent = new Intent(this, EditTextActivity.class);
                 intent.putExtra("mySession", mySessionResponse);
                 startActivityForResult(intent,1);
                 break;
@@ -125,7 +132,7 @@ public class ListActivity extends AppCompatActivity implements OnViewHolderListe
     @Override
     public void onPostClick(int position) {
         myNotes.get(position);
-        Intent intent = new Intent(this, SingleTextActivity.class);
+        Intent intent = new Intent(this, DetailActivity.class);
         startActivity(intent);
     }
 

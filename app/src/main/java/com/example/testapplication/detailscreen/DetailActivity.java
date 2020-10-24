@@ -1,11 +1,13 @@
-package com.example.testapplication;
+package com.example.testapplication.detailscreen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class SingleTextActivity extends AppCompatActivity {
+import com.example.testapplication.R;
+
+public class DetailActivity extends AppCompatActivity {
     TextView mSingleTextiew;
 
     @Override

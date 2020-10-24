@@ -1,12 +1,12 @@
-package com.example.testapplication;
+package com.example.testapplication.listscreen;
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.testapplication.R;
 
 public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     TextView textViewDa;

@@ -1,4 +1,4 @@
-package com.example.testapplication;
+package com.example.testapplication.listscreen;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,8 +7,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.testapplication.R;
+
 import java.util.List;
-import java.util.zip.Inflater;
 
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
