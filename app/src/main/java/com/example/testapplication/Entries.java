@@ -5,13 +5,13 @@ import java.util.ArrayList;
 public class Entries {
 
     int status;
-    ArrayList<MData> data;
+    ArrayList<ArrayList<MData>> data;
 
     public int getStatus() {
         return status;
     }
 
-    public ArrayList<MData> getData() {
+    public ArrayList<ArrayList<MData>> getData() {
         return data;
     }
 

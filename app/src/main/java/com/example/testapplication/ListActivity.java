@@ -48,6 +48,8 @@ public class ListActivity extends AppCompatActivity implements OnViewHolderListe
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
+
+
         //создаем Retrofit и получаем сессию
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://bnet.i-partner.ru/")
@@ -126,8 +128,10 @@ public class ListActivity extends AppCompatActivity implements OnViewHolderListe
         Intent intent = new Intent(this, SingleTextActivity.class);
         startActivity(intent);
     }
+
+    //получаем ранее введенные данные
     public void getEntries() {
-        Call<Entries> call = getEntries.getEntry(mySessionResponse);
+        Call<Entries> call = getEntries.getEntry("get_entries", mySessionResponse+"");
 
         call.enqueue(new Callback<Entries>() {
             @Override
