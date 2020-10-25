@@ -5,10 +5,16 @@
     android:layout_height="match_parent"
     tools:context=".screens.detail.DetailActivity">
 
-    <TextView
-        android:id="@+id/single_text"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="20sp"
-        android:gravity="center"/>
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/single_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="20sp"
+            android:gravity="center"/>
+
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
