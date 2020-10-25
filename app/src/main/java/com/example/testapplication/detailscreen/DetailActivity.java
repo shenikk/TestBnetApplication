@@ -7,9 +7,10 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.testapplication.R;
+import com.example.testapplication.listScreen.ListActivity;
 
 public class DetailActivity extends AppCompatActivity {
-    TextView mSingleTextView;
+    private TextView mSingleTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,10 +19,14 @@ public class DetailActivity extends AppCompatActivity {
 
         mSingleTextView = findViewById(R.id.single_text);
 
+        setupContent();
+    }
+
+    private void setupContent() {
         Intent intent = getIntent();
-        String resultBody = intent.getStringExtra("MyEntries");
-        String resultDa = intent.getStringExtra("MyDa");
-        String resultDm = intent.getStringExtra("MyDm");
+        String resultBody = intent.getStringExtra(ListActivity.INTENT_ENTRIES);
+        String resultDa = intent.getStringExtra(ListActivity.INTENT_DA);
+        String resultDm = intent.getStringExtra(ListActivity.INTENT_DM);
 
         String text = resultDa + "\n" + resultDm + "\n" + resultBody;
 

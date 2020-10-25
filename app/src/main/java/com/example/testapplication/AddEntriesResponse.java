@@ -1,11 +1,11 @@
 package com.example.testapplication;
 
-public class Post {
+public class AddEntriesResponse {
 
     private String session;
     private String body;
 
-    public Post(String session, String body) {
+    public AddEntriesResponse(String session, String body) {
         this.session = session;
         this.body = body;
     }

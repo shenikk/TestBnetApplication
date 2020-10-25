@@ -11,30 +11,27 @@ import com.example.testapplication.R;
 
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
+public class NoteAdapter extends RecyclerView.Adapter<NoteViewHolder> {
 
     private List<Note> notes;
     private OnViewHolderListener onViewHolderListener;
 
-    public MyAdapter(List<Note> notes, OnViewHolderListener onViewHolderListener) {
+    public NoteAdapter(List<Note> notes, OnViewHolderListener onViewHolderListener) {
         this.notes = notes;
         this.onViewHolderListener = onViewHolderListener;
     }
 
-
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public NoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.example_note, parent,false);
-        return new MyViewHolder(view, onViewHolderListener);
+        return new NoteViewHolder(view, onViewHolderListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull NoteViewHolder holder, int position) {
         Note currentNote = notes.get(position);
-        holder.textViewDa.setText(currentNote.getDa());
-        holder.textViewDm.setText(currentNote.getDm());
-        holder.textViewNote.setText(currentNote.getBody());
+        holder.configure(currentNote);
     }
 
     @Override

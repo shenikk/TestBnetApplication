@@ -11,5 +11,5 @@ public interface AddEntries {
     @FormUrlEncoded
     @Headers("token: N6zbaS4-G6-RDMQKyb")
     @POST("testAPI/")
-    Call<Post> createPost(@Field("a") String value, @Field("session") String session, @Field("body") String text);
+    Call<AddEntriesResponse> createPost(@Field("a") String value, @Field("session") String session, @Field("body") String text);
 }

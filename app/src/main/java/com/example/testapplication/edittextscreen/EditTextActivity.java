@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.testapplication.AddEntries;
-import com.example.testapplication.Post;
+import com.example.testapplication.AddEntriesResponse;
 import com.example.testapplication.R;
 import com.example.testapplication.listScreen.ListActivity;
 
@@ -22,9 +22,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class EditTextActivity extends AppCompatActivity {
-    EditText mEditText;
-    Button mButtonSave;
-    Button mButtonCancel;
+    private EditText mEditText;
+    private Button mButtonSave;
+    private Button mButtonCancel;
     private AddEntries addEntries;
 
     @Override
@@ -32,13 +32,14 @@ public class EditTextActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_text);
 
-        //инициализация View
+        /* инициализируем View */
         mEditText = (EditText) findViewById(R.id.editText);
         mButtonSave = (Button) findViewById(R.id.button1);
         mButtonCancel = (Button) findViewById(R.id.button2);
 
+        String baseUrl = "https://bnet.i-partner.ru/";
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://bnet.i-partner.ru/")
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -54,7 +55,6 @@ public class EditTextActivity extends AppCompatActivity {
                 }
             }
         });
-
         mButtonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,30 +65,28 @@ public class EditTextActivity extends AppCompatActivity {
 
     private void createPost() {
 
-        //получаем сессию
+        /* получаем сессию */
         Intent intent = getIntent();
-        String session = intent.getStringExtra("mySession");
+        String session = intent.getStringExtra(ListActivity.INTENT_SESSION);
 
-        Call<Post> call = addEntries.createPost("add_entry", session+"", mEditText.getText().toString()+"");
+        Call<AddEntriesResponse> call = addEntries.createPost("add_entry", session+"", mEditText.getText().toString()+"");
 
-        call.enqueue(new Callback<Post>() {
+        call.enqueue(new Callback<AddEntriesResponse>() {
             @Override
-            public void onResponse(Call<Post> call, Response<Post> response) {
+            public void onResponse(Call<AddEntriesResponse> call, Response<AddEntriesResponse> response) {
                 Log.d("MyTag", "Получили response");
 
                 if (response.isSuccessful()) {
-                    Post postResponse = response.body();
 
-                    //передаем данные первому экрану
+                    /* сообщаем ListActivity, что ответ был получен */
                     Intent resultIntent = new Intent(getBaseContext(), ListActivity.class);
-                    resultIntent.putExtra("result", mEditText.getText().toString());
                     setResult(RESULT_OK, resultIntent);
                     finish();
                 }
             }
 
             @Override
-            public void onFailure(Call<Post> call, Throwable t) {
+            public void onFailure(Call<AddEntriesResponse> call, Throwable t) {
                 mEditText.setText(t.getMessage());
                 Log.d("MyTag", "Получили ошибку");
             }
