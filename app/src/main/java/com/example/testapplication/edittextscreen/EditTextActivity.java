@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.testapplication.AddEntries;
 import com.example.testapplication.Post;
@@ -23,18 +24,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class EditTextActivity extends AppCompatActivity {
     EditText mEditText;
     Button mButtonSave;
-    Button mButtonDelete;
+    Button mButtonCancel;
     private AddEntries addEntries;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_edit_text);
 
         //инициализация View
         mEditText = (EditText) findViewById(R.id.editText);
         mButtonSave = (Button) findViewById(R.id.button1);
-        mButtonDelete = (Button) findViewById(R.id.button2);
+        mButtonCancel = (Button) findViewById(R.id.button2);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://bnet.i-partner.ru/")
@@ -46,9 +47,18 @@ public class EditTextActivity extends AppCompatActivity {
         mButtonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //если editText не пуст, то отправляем данные на сервер
-                createPost();
+                if (!mEditText.getText().toString().isEmpty()) {
+                    createPost();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Введите текст!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
+        mButtonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }
@@ -68,7 +78,6 @@ public class EditTextActivity extends AppCompatActivity {
 
                 if (response.isSuccessful()) {
                     Post postResponse = response.body();
-                    mEditText.setText(postResponse + "");
 
                     //передаем данные первому экрану
                     Intent resultIntent = new Intent(getBaseContext(), ListActivity.class);

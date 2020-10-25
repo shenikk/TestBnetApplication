@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.example.testapplication.Entries;
 import com.example.testapplication.GetEntries;
@@ -76,7 +75,6 @@ public class ListActivity extends AppCompatActivity implements OnViewHolderListe
                     mySessionResponse = response.body().data.session;
                 }
             }
-
             @Override
             public void onFailure(Call<MySession> call, Throwable t) {
                 t.printStackTrace();
