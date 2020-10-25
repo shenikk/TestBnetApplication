@@ -2,10 +2,12 @@ package com.example.testapplication.screens.list;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -126,11 +128,13 @@ public class ListActivity extends AppCompatActivity implements OnViewHolderListe
             public void onResponse(Call<BnetSessionResponse> call, Response<BnetSessionResponse> response) {
                 if (response.isSuccessful()) {
                     mySessionResponse = response.body().data.session;
+                } else {
+                    showCreateSessionAlert();
                 }
             }
             @Override
             public void onFailure(Call<BnetSessionResponse> call, Throwable t) {
-                t.printStackTrace();
+                showCreateSessionAlert();
             }
         });
     }
@@ -149,12 +153,41 @@ public class ListActivity extends AppCompatActivity implements OnViewHolderListe
                     myNotes.addAll(getEntriesResponse.getData().get(0));
 
                     mAdapter.notifyDataSetChanged();
+                } else {
+                    showGetEntriesAlert();
                 }
             }
             @Override
             public void onFailure(Call<GetEntriesResponse> call, Throwable t) {
-                t.printStackTrace();
+                showGetEntriesAlert();
             }
         });
     }
+
+    private void showGetEntriesAlert() {
+        new AlertDialog.Builder(this)
+                .setTitle("Опаньки! Что-то пошло не так")
+                .setMessage("Попробовать еще раз?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        getEntries();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null)
+                .show();
+    }
+
+    private void showCreateSessionAlert() {
+        new AlertDialog.Builder(this)
+                .setTitle("Опаньки! Что-то пошло не так")
+                .setMessage("Попробовать еще раз?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        getSession();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null)
+                .show();
+    }
+
 }

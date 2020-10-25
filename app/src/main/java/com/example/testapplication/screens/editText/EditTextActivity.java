@@ -1,7 +1,9 @@
 package com.example.testapplication.screens.editText;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -82,14 +84,28 @@ public class EditTextActivity extends AppCompatActivity {
                     Intent resultIntent = new Intent(getBaseContext(), ListActivity.class);
                     setResult(RESULT_OK, resultIntent);
                     finish();
+                } else {
+                    showCreatePostAlert();
                 }
             }
 
             @Override
             public void onFailure(Call<AddEntriesResponse> call, Throwable t) {
-                mEditText.setText(t.getMessage());
-                Log.d("MyTag", "Получили ошибку");
+                showCreatePostAlert();
             }
         });
+    }
+
+    private void showCreatePostAlert() {
+        new AlertDialog.Builder(this)
+                .setTitle("Опаньки! Что-то пошло не так")
+                .setMessage("Попробовать еще раз?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        createPost();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null)
+                .show();
     }
 }
