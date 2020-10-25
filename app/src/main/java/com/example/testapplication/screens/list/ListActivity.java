@@ -108,7 +108,6 @@ public class ListActivity extends AppCompatActivity implements OnViewHolderListe
 
     @Override
     public void onPostClick(int position) {
-        myNotes.get(position);
         Intent intent = new Intent(this, DetailActivity.class);
 
         intent.putExtra(INTENT_DA, myNotes.get(position).da);

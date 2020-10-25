@@ -28,7 +28,9 @@ public class DetailActivity extends AppCompatActivity {
         String resultDa = intent.getStringExtra(ListActivity.INTENT_DA);
         String resultDm = intent.getStringExtra(ListActivity.INTENT_DM);
 
-        String text = resultDa + "\n" + resultDm + "\n" + resultBody;
+        String text = "дата создания: " + resultDa + "\n"
+                + "дата модификации: " + resultDm + "\n"
+                + resultBody;
 
         mSingleTextView.setText(text);
     }

@@ -31,8 +31,13 @@ public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     }
 
     public void configure(Note note) {
-        textViewDa.setText(note.getDa());
-        textViewDm.setText(note.getDm());
+
+        if (!note.getDa().equals(note.getDm())) {
+            textViewDm.setText("дата модификации: " + note.getDm());
+        } else {
+            textViewDa.setText("");
+        }
+        textViewDa.setText("дата создания: " + note.getDa());
         textViewNote.setText(note.getBody());
     }
 }
