@@ -1,4 +1,4 @@
-package com.example.testapplication.listScreen;
+package com.example.testapplication.screens.list;
 
 import android.view.View;
 import android.widget.TextView;

@@ -1,6 +1,6 @@
-package com.example.testapplication;
+package com.example.testapplication.services;
 
-import com.example.testapplication.listScreen.Note;
+import com.example.testapplication.screens.list.Note;
 
 import java.util.ArrayList;
 

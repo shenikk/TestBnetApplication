@@ -1,4 +1,4 @@
-package com.example.testapplication.edittextscreen;
+package com.example.testapplication.screens.editText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,10 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.testapplication.AddEntries;
-import com.example.testapplication.AddEntriesResponse;
+import com.example.testapplication.services.AddEntries;
+import com.example.testapplication.services.AddEntriesResponse;
 import com.example.testapplication.R;
-import com.example.testapplication.listScreen.ListActivity;
+import com.example.testapplication.screens.list.ListActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;

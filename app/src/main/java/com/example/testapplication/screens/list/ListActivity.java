@@ -1,4 +1,4 @@
-package com.example.testapplication.listScreen;
+package com.example.testapplication.screens.list;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,13 +12,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.example.testapplication.GetEntriesResponse;
-import com.example.testapplication.GetEntries;
-import com.example.testapplication.edittextscreen.EditTextActivity;
-import com.example.testapplication.BnetSessionResponse;
+import com.example.testapplication.services.GetEntriesResponse;
+import com.example.testapplication.services.GetEntries;
+import com.example.testapplication.screens.editText.EditTextActivity;
+import com.example.testapplication.services.BnetSessionResponse;
 import com.example.testapplication.R;
-import com.example.testapplication.BnetSession;
-import com.example.testapplication.detailscreen.DetailActivity;
+import com.example.testapplication.services.BnetSession;
+import com.example.testapplication.screens.detail.DetailActivity;
 
 import java.util.ArrayList;
 

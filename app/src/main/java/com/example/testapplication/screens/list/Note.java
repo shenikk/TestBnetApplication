@@ -1,4 +1,4 @@
-package com.example.testapplication.listScreen;
+package com.example.testapplication.screens.list;
 
 public class Note {
     public String da;

@@ -1,4 +1,4 @@
-package com.example.testapplication.detailscreen;
+package com.example.testapplication.screens.detail;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.testapplication.R;
-import com.example.testapplication.listScreen.ListActivity;
+import com.example.testapplication.screens.list.ListActivity;
 
 public class DetailActivity extends AppCompatActivity {
     private TextView mSingleTextView;
